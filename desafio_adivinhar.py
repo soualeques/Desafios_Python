@@ -10,23 +10,31 @@ from time import sleep # importação para dar um tempo nas respostas as tentati
 frases_ganhou = choices(('Parabéns! Você acertou na mosca.',
          'Uau! Você é bom nisso mesmo, como adivinhou?!',
          'Nossa! como descobriu?!... você é o Sherlock Holmes?!',
-         'Parabéns! número correto.'))
+         'Parabéns! número correto.',
+         'Nada mal detetive.',
+         'Você realmente leu minha mente!... se tivesse uma é claro kkk.'))
 frases_menor = choices(('Hummm... um pouco menos.',
-                      'Não foi dessa vez... tente um número menor',
-                      'Número muito alto...tente um menor.'))
+                      'Não foi dessa vez... tente um número menor.',
+                      'Número muito alto...tente um menor.',
+                      'Estou pensando em um número menor chefe.',
+                      'ÉÉÉHHR...pense em um número mais baixo.',
+                      'Muito dificil para você?...o número é menor rs.'))
 frases_maior = choices(('Número muito baixo... tente um maior.',
                       'Quase hein... tente um número maior.',
-                      'Hummm... número muito baixo, tente um maior'))
+                      'Hummm... número muito baixo, tente um maior',
+                      'Não... o número é maior chefe.',
+                      'Pense melhor!... o é número maior que este.',
+                      'Suas chances estão acabando... digite um número maior ai.',
+                      'Segundo meus algoritmos o número é maior.'))
 
 # criado uma função com o código principal do jogo.
-def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade):
+def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade = 100):
         tentativas = 0
         n = [1,2,3,4,5,6,7,8,9,10]
         while True:    
             try:    
-                
                 # a cada palpite do usúario o número de tentativas recebe ela mesma + 1
-                jogador = int(input('\033[1;32mSua tentativa: \033[m'))
+                jogador = int(input('\033[1;33mSua tentativa: \033[m'))
                 # desta forma o usuario só podera digitar números de 1 a 10.
                 if jogador in n:
                     print('\033[1;36m-=\033[m' * 30)
@@ -46,9 +54,11 @@ def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade):
                         break
                     # caso o usúario chute um número maior
                     elif jogador > numero_secreto:
-                        for frase in frase_menor:
-                            sleep(1)
-                            print(F'\033[1;33m{frase}\033[m')
+                        while True:    
+                            for frase in frase_menor:
+                                sleep(1)
+                                print(F'\033[1;33m{frase}\033[m')
+                            break
                         print(f'Faltam \033[1;31m{tent_faltantes}\033[m tentativas!')
                     # caso o usúario chute um número menor
                     elif jogador < numero_secreto:
@@ -73,13 +83,12 @@ def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade):
                     print('\033[1;31mERRO! aceito somente números de 1 a 10\033[m')
                 # tratamento de erros.
             except:
-                    print('\033[1;31;44mAÇÃO NÃO PERMITIDA!\033[m')
+                    print('\033[1;44mAÇÃO NÃO PERMITIDA!, digite um número válido.\033[m')
             # irá mostrar no final do loop o total de tentativas do usúario.        
             print(f"Número de tentativas: \033[1;36m{tentativas}\033[m.")
 
         
-# randint para gerar o número inteiro secreto do jogo.
-numero_secreto1 = randint(1,10)
+
 
 # loop infinito para trabalhar a escolha de dificuldade do jogo.
 while True:
@@ -88,8 +97,10 @@ while True:
     print('-=' * 30)
     print()
     try:
+        # randint para gerar o número inteiro secreto do jogo.
+        numero_secreto1 = randint(1,10)
         # usúario irá escolher o nível de dificuldade de acordo com os indices.
-        dificuldade = int(input('''NIVEL DE DIFICULDADE:\n\033[1;32m1 para Fácil\033[m (tentativas = infinitas)
+        dificuldade = int(input('''NIVEL DE DIFICULDADE:\n\033[1;32m1 para Fácil\033[m (tentativas = 100)
 \033[1;33m2 para Normal\033[m (tentativas = 9)
 \033[1;31m3 para Díficil\033[m (tentativas = 3)
     \nSUA ESCOLHA: '''))
@@ -131,7 +142,7 @@ while True:
             print('\033[1;31mERRO! ESCOLHA INVÁLIDA.\033[m')
     # tratamento de erro caso o usúario digite alguma tecla além de números inteiros.
     except ValueError:
-        print('\033[1;31mERRO! aceiito apenas numeros inteiros :)\033[m')
+        print('\033[1;31mERRO! aceito apenas numeros inteiros :)\033[m')
     # tratamento de erro caso o usúario faça gambiarra de usar "Ctrl + C" para sair... dica que peguei na reunião dia 13/04/22 do grupo de projetos no telegram.
     # a próposito: obrigado pela dica hehe.
     except KeyboardInterrupt:
