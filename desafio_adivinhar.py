@@ -21,55 +21,61 @@ frases_maior = choices(('Número muito baixo... tente um maior.',
 # criado uma função com o código principal do jogo.
 def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade):
         tentativas = 0
+        n = [1,2,3,4,5,6,7,8,9,10]
         while True:    
             try:    
+                
                 # a cada palpite do usúario o número de tentativas recebe ela mesma + 1
                 jogador = int(input('\033[1;32mSua tentativa: \033[m'))
-                print('\033[1;36m-=\033[m' * 30)
-                tentativas += 1
-                # variavel criada para criar função onde vai mostrar o número de tentativas restantes de acordo com a dificuldade escolhida.
-                tent_faltantes = dificuldade - tentativas
-                # caso o usúario chegue ao limite de tentativas o programa mostra a mensagem e para.
-                if dificuldade == tentativas:
-                    sleep(1)
-                    print('\033[1;33mNão foi dessa vez, talvez tenha mais sorte na próxima\033[m')
-                    break
-                # caso o usúario acerte o número.
-                if jogador == numero_secreto:
-                    for frase in frase_ganhou:
+                # desta forma o usuario só podera digitar números de 1 a 10.
+                if jogador in n:
+                    print('\033[1;36m-=\033[m' * 30)
+                    tentativas += 1
+                    # variavel criada para criar função onde vai mostrar o número de tentativas restantes de acordo com a dificuldade escolhida.
+                    tent_faltantes = dificuldade - tentativas
+                    # caso o usúario chegue ao limite de tentativas o programa mostra a mensagem e para.
+                    if dificuldade == tentativas:
                         sleep(1)
-                        print(F'\033[1;32m{frase}\033[m')
-                    break
-                # caso o usúario chute um número maior
-                elif jogador > numero_secreto:
-                    for frase in frase_menor:
+                        print('\033[1;33mNão foi dessa vez, talvez tenha mais sorte na próxima\033[m')
+                        break
+                    # caso o usúario acerte o número.
+                    if jogador == numero_secreto:
+                        for frase in frase_ganhou:
+                            sleep(1)
+                            print(F'\033[1;32m{frase}\033[m')
+                        break
+                    # caso o usúario chute um número maior
+                    elif jogador > numero_secreto:
+                        for frase in frase_menor:
+                            sleep(1)
+                            print(F'\033[1;33m{frase}\033[m')
+                        print(f'Faltam \033[1;31m{tent_faltantes}\033[m tentativas!')
+                    # caso o usúario chute um número menor
+                    elif jogador < numero_secreto:
+                        for frase in frase_maior:
+                            sleep(1)
+                            print(F'\033[1;33m{frase}\033[m')
+                        print(f'Faltam \033[1;31m{tent_faltantes}\033[m tentativas!')
+                    print('\033[1;36m-=\033[m' * 30)
+                    # irá perguntar se quer mais tentativas até acertar ou vhegar no limite de tentativas.
+                    res = str(input('Quer mais uma tentativa? [S/N]: ')).strip().upper()[0]
+                    while res not in "SN":
+                        res = str(input('\033[1;31mERRO DE DIGITAÇÃO!...\033[mQuer mais uma tentativa? [S/N]: ')).strip().upper()[0]
+                    # se resposta for sim o código volta o loop.
+                    if res == "S":
+                        continue
+                    # se resposta for não o loop será interrompido.
+                    elif res == "N":
                         sleep(1)
-                        print(F'\033[1;33m{frase}\033[m')
-                    print(f'Faltam \033[1;31m{tent_faltantes}\033[m tentativas!')
-                # caso o usúario chute um número menor
-                elif jogador < numero_secreto:
-                    for frase in frase_maior:
-                        sleep(1)
-                        print(F'\033[1;33m{frase}\033[m')
-                    print(f'Faltam \033[1;31m{tent_faltantes}\033[m tentativas!')
-                print('\033[1;36m-=\033[m' * 30)
-                # irá perguntar se quer mais tentativas até acertar ou vhegar no limite de tentativas.
-                res = str(input('Quer mais uma tentativa? [S/N]: ')).strip().upper()[0]
-                while res not in "SN":
-                    res = str(input('\033[1;31mERRO DE DIGITAÇÃO!...\033[mQuer mais uma tentativa? [S/N]: ')).strip().upper()[0]
-                # se resposta for sim o código volta o loop.
-                if res == "S":
-                    continue
-                # se resposta for não o loop será interrompido.
-                elif res == "N":
-                    sleep(1)
-                    print('\033[1;33mTudo bem desistir... pelo menos você tentou :)\033[m')
-                    break
-            # tratamento de erros.
+                        print('\033[1;33mTudo bem desistir... pelo menos você tentou :)\033[m')
+                        break
+                else:
+                    print('\033[1;31mERRO! aceito somente números de 1 a 10\033[m')
+                # tratamento de erros.
             except:
-                print('\033[1;31;44mAÇÃO NÃO PERMITIDA!\033[m')
-        # irá mostrar no final do loop o total de tentativas do usúario.        
-        print(f"Número de tentativas: \033[1;36m{tentativas}\033[m.")
+                    print('\033[1;31;44mAÇÃO NÃO PERMITIDA!\033[m')
+            # irá mostrar no final do loop o total de tentativas do usúario.        
+            print(f"Número de tentativas: \033[1;36m{tentativas}\033[m.")
 
         
 # randint para gerar o número inteiro secreto do jogo.
