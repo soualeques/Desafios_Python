@@ -5,27 +5,6 @@
 from random import randint,choices # importação para gerar o numero aleatório e escolher aleatóriamente uma frase das que criei.
 from time import sleep # importação para dar um tempo nas respostas as tentativas do usúario a fim de criar um ar de jogo.
 
-# tuplas com frases caso o usúario ganhe, chute um numero menor ou menor.
-# usando a função choices para ela selecionar uma frase aleatória das tuplas.
-frases_ganhou = choices(('Parabéns! Você acertou na mosca.',
-         'Uau! Você é bom nisso mesmo, como adivinhou?!',
-         'Nossa! como descobriu?!... você é o Sherlock Holmes?!',
-         'Parabéns! número correto.',
-         'Nada mal detetive.',
-         'Você realmente leu minha mente!... se tivesse uma é claro kkk.'))
-frases_menor = choices(('Hummm... um pouco menos.',
-                      'Não foi dessa vez... tente um número menor.',
-                      'Número muito alto...tente um menor.',
-                      'Estou pensando em um número menor chefe.',
-                      'ÉÉÉHHR...pense em um número mais baixo.',
-                      'Muito dificil para você?...o número é menor rs.'))
-frases_maior = choices(('Número muito baixo... tente um maior.',
-                      'Quase hein... tente um número maior.',
-                      'Hummm... número muito baixo, tente um maior',
-                      'Não... o número é maior chefe.',
-                      'Pense melhor!... o é número maior que este.',
-                      'Suas chances estão acabando... digite um número maior ai.',
-                      'Segundo meus algoritmos o número é maior.'))
 
 # criado uma função com o código principal do jogo.
 def jogo(numero_secreto, frase_ganhou, frase_menor, frase_maior, dificuldade = 100):
@@ -97,6 +76,28 @@ while True:
     print('-=' * 30)
     print()
     try:
+        
+# tuplas com frases caso o usúario ganhe, chute um numero menor ou menor.
+# usando a função choices para ela selecionar uma frase aleatória das tuplas.
+        frases_ganhou = choices(('Parabéns! Você acertou na mosca.',
+         'Uau! Você é bom nisso mesmo, como adivinhou?!',
+         'Nossa! como descobriu?!... você é o Sherlock Holmes?!',
+         'Parabéns! número correto.',
+         'Nada mal detetive.',
+         'Você realmente leu minha mente!... se tivesse uma é claro kkk.'))
+        frases_menor = choices(('Hummm... um pouco menos.',
+                      'Não foi dessa vez... tente um número menor.',
+                      'Número muito alto...tente um menor.',
+                      'Estou pensando em um número menor chefe.',
+                      'ÉÉÉHHR...pense em um número mais baixo.',
+                      'Muito dificil para você?...o número é menor rs.'))
+        frases_maior = choices(('Número muito baixo... tente um maior.',
+                      'Quase hein... tente um número maior.',
+                      'Hummm... número muito baixo, tente um maior',
+                      'Não... o número é maior chefe.',
+                      'Pense melhor!... o é número maior que este.',
+                      'Suas chances estão acabando... digite um número maior ai.',
+                      'Segundo meus algoritmos o número é maior.'))
         # randint para gerar o número inteiro secreto do jogo.
         numero_secreto1 = randint(1,10)
         # usúario irá escolher o nível de dificuldade de acordo com os indices.
